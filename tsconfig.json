@@ -1,0 +1,19 @@
+{
+    "chromeWebSecurity": false,
+    "compilerOptions": {
+        "resolveJsonModule" : true,
+        "types": [
+            "cypress",
+            "node",
+            "cypress-xpath",
+            "cypress-file-upload"
+        ],
+        "baseUrl": "./"
+    },
+    "include": [
+        "**/*.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

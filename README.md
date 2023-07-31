@@ -4,7 +4,7 @@
 
 Step into the world of Cypress test scripts by becoming a part of our GitHub repository. We foster an inclusive and supportive atmosphere, encouraging all levels of expertise to participate and grow together.
 
-<!--![altcypress-banner](./cypress-banner.jpg) -->
+![altcypress-banner](./cypress-banner.jpg)
 
 ### Table of Contents
 

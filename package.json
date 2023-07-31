@@ -4,12 +4,37 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "delete:junitreports": "rm cypress/junit-reports/* || true",
+    "combine:junituireports": "jrm cypress/junit-reports/junit-ui-report.xml \"cypress/junit-reports/*.xml\"",
+    "combine:junitapireports": "jrm cypress/junit-reports/junit-api-report.xml \"cypress/junit-reports/*.xml\"",
+    "uireport": "npx cypress run --spec \"cypress/e2e/UI/TESTUI/*.ts\" --reporter junit --config-file cypress.junit.config.ts --headless",
+    "apireport": "npx cypress run --spec cypress/e2e/API/**/*.ts* --reporter junit --config-file cypress.junit.config.ts --headless",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^12.17.2"
+    "cypress": "^12.17.2",
+    "cypress-file-upload": "^5.0.8",
+    "cypress-junit-reporter": "^1.3.1",
+    "cypress-mochawesome-reporter": "^3.2.3",
+    "cypress-xpath": "^2.0.1",
+    "junit-report-merger": "^4.0.0",
+    "mocha": "^10.2.0",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^8.0.2",
+    "chai": "^4.3.7",
+    "chai-sorted": "^0.2.0",
+    "csv": "^6.3.1",
+    "exceljs": "^4.3.0",
+    "fs": "^0.0.1-security",
+    "neat-csv": "^5.2.0",
+    "node-xlsx": "^0.21.0",
+    "parse-csv": "^0.2.0",
+    "uuid": "^9.0.0"
   }
 }

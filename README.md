@@ -39,6 +39,14 @@ for this project,
 
 1. Type `npm install` on IDE terminal should be enough.
 
+Usefull Commands,
+    *   `npm install cypress --save-dev`
+    *   `npm install cypress --save-dev cypress@12.12.0`
+    *   `npm i --save-dev cypress-mochawesome-reporter`
+    *   `npm install -g typescript`
+    *   `npm audit fix --force`
+    *   `npm audit fix --legacy-peer-deps`
+
 ### Running the Tests
 
 1. `npx cypress open` - run test runner

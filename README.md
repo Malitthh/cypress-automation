@@ -50,7 +50,8 @@ Usefull Commands,
 ### Running the Tests
 
 1. `npx cypress open` - run test runner
-2. `npx cypress run --browser chrome --browser-version 94` - run a specific test with UI with specific browser
+2. `npx cypress run --browser chrome--browser-version 94` - run a specific test with UI with specific browser
+3. `npx cypress run --headed--browser chrome--spec "cypress\e2e\UI\TestUI"` - run a test suite
 
 ### Report Generation
 

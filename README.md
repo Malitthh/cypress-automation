@@ -46,6 +46,7 @@ Usefull Commands,
 4. Type`npm install -g typescript`
 5. Type`npm audit fix --force`
 6. Type`npm audit fix --legacy-peer-deps`
+7. Type`npm install cypress-multi-reporters --save-dev`
 
 ### Running the Tests
 

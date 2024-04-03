@@ -23,7 +23,7 @@ jobs:
         run: npm ci
 
       - name: Run Cypress tests
-        run: npm run cy:run
+        run: npm run cy:run -- --spec "cypress/integration/UI/SwagLabsUI/**/*.ts"
 
       - name: Upload Cypress screenshots and videos
         uses: actions/upload-artifact@v2

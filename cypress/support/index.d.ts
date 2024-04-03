@@ -14,7 +14,7 @@ declare namespace Cypress {
 
 declare namespace Cypress {
     interface Chainable<Subject = any> {
-        LoginHRM(
+        Login(
             username,
             password
         )

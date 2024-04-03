@@ -24,9 +24,9 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add("LoginHRM", (username, password): any => {
+Cypress.Commands.add("Login", (username, password): any => {
     cy.intercept("GET", "/Login").as("url");
-    cy.visit(Cypress.env("abc"));
+    cy.visit(Cypress.env("saucedemoURL"));
     cy.xpath("//input[@name='user-name']").type(username);
     cy.xpath("//input[@name='password']").type(password);
     cy.xpath("//input[@id='login-button']").click();

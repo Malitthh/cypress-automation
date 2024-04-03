@@ -38,11 +38,11 @@ module.exports = defineConfig({
     taskTimeout: 120000,
     specPattern: "cypress/e2e/**/*.{ts,tsx}",
     env: {
-      abc:"https://www.saucedemo.com/",
+      saucedemoURL:"https://www.saucedemo.com/",
       hrmURL: "https://opensource-demo.orangehrmlive.com/",
       opencartURL: "https://demo.opencart.com/",
-      mockAPIPOST: "https://petstore.swagger.io/POST",
-      mockAPIGET: "https://petstore.swagger.io/GET"
+      petstorePOST: "https://petstore.swagger.io/POST",
+      petstoreGET: "https://petstore.swagger.io/GET"
     },
     retries: {
       runMode: 1,

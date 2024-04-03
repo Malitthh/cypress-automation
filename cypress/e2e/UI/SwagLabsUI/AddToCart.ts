@@ -1,15 +1,15 @@
 /// <reference types="cypress" />
 import Common from "cypress/support/Commons";
 
-describe("Login and Update My Info", () => {
+describe("Login and Add Items to Cart", () => {
     let Data;
 
     beforeEach(function () {
-        cy.fixture("testData").then((user) => {
+        cy.fixture("swaglabsTestData").then((user) => {
             Data = user;
             let username = Data.Username;
             let password = Data.Password;
-            cy.LoginHRM(username, password);
+            cy.Login(username, password);
         });
     });
 

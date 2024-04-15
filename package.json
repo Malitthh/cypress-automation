@@ -7,7 +7,7 @@
     "delete:junitreports": "rm cypress/junit-reports/* || true",
     "combine:junituireports": "jrm cypress/junit-reports/junit-ui-report.xml \"cypress/junit-reports/*.xml\"",
     "combine:junitapireports": "jrm cypress/junit-reports/junit-api-report.xml \"cypress/junit-reports/*.xml\"",
-    "uireport": "npx cypress run --spec \"cypress/e2e/UI/TESTUI/*.ts\" --reporter junit --config-file cypress.junit.config.ts --headless",
+    "uireport": "npx cypress run --spec \"cypress/e2e/UI/SwagLabsUI/*.ts\" --reporter junit --config-file cypress.junit.config.ts --headless",
     "apireport": "npx cypress run --spec cypress/e2e/API/**/*.ts* --reporter junit --config-file cypress.junit.config.ts --headless",
     "cy:open": "cypress open",
     "cy:run": "cypress run"

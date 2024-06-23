@@ -1,0 +1,136 @@
+const { defineConfig } = require("cypress");
+const xlsx = require('node-xlsx').default; // to read excel files
+const fs = require('fs'); // for file
+const mssql = require('mssql'); // for MSSQL database interaction
+const decompress = require('decompress');
+const destFolder = "cypress\\downloads";
+
+let pool; // To store the db connection pool
+
+module.exports = defineConfig({
+  reporter: 'cypress-multi-reporters',
+  reporterOptions: {
+    configFile: 'reporter-config.json',
+  },
+  e2e: {
+    experimentalModifyObstructiveThirdPartyCode: true,
+    chromeWebSecurity: true,
+    experimentalInteractiveRunEvents: true,
+    setupNodeEvents(on) {
+      require('cypress-mochawesome-reporter/plugin')(on);
+      
+      on('task', {
+        parseCsv({ filePath }) {
+          return new Promise((resolve, reject) => {
+            try {
+              const jsonData = xlsx.parse(fs.readFileSync(filePath));
+              resolve(jsonData);
+            } catch (e) {
+              reject(e);
+            }
+          });
+        },
+        unzipme({ filePath }) {
+          return new Promise((resolve, reject) => {
+            try {
+              decompress(filePath, destFolder)
+              resolve(true);
+            } catch (e) {
+              reject(e);
+            }
+          });
+        },
+        parseXML({ filePath }) {
+          return new Promise((resolve, reject) => {
+            try {
+              resolve(fs.readFileSync(filePath, "utf-8"))
+            } catch (e) {
+              reject(e);
+            }
+          });
+        },
+        establishMSSQLConnection(serverName) {
+          return new Promise((resolve, reject) => {
+            const config = {
+              user: 'Test_DB',
+              domain: 'GoogleCloud',
+              password: 'b0ies',
+              server: serverName,
+              options: {
+                encrypt: true,
+                enableArithAbort: true,
+                rowCollectionOnRequestCompletion: true,
+                trusted_connection: true,
+                multipleActiveResultSets: true,
+                trustServerCertificate: true
+              },
+            };
+            pool = new mssql.ConnectionPool(config); // create a new connection pool using mssql library
+            pool.connect() // connect to the db
+              .then(() => {
+                console.log('MSSQL connection established successfully');
+                resolve(true);
+              })
+              .catch((error) => {
+                console.error('Error establishing MSSQL connection:', error);
+                reject(error);
+              });
+          });
+        },
+        executeMSSQLQuery({ query }) {
+          return new Promise((resolve, reject) => {
+            if (!pool) {
+              const error = new Error('MSSQL connection has not been established');
+              reject(error);
+            }
+            const request = pool.request();
+            request.query(query)
+              .then((result) => {
+                console.log('MSSQL query executed successfully');
+                resolve(result);
+              })
+              .catch((error) => {
+                console.error('Error executing MSSQL query:', error);
+                reject(error);
+              });
+          });
+        },
+        dropMSSQLConnection() {
+          return new Promise((resolve, reject) => {
+            if (!pool) {
+              const error = new Error('MSSQL connection has not been established');
+              reject(error);
+            }
+            pool.close()
+              .then(() => {
+                console.log('MSSQL connection pool closed');
+                resolve(true);
+              })
+              .catch((error) => {
+                console.error('Error closing MSSQL connection pool:', error);
+                reject(error);
+              });
+          });
+        },
+      });
+    },
+    taskTimeout: 120000,
+    specPattern: "cypress/e2e/**/*.{ts,tsx}",
+    env: {
+        URLS
+    },
+    retries: {
+      runMode: 1,
+      openMode: 1,
+    },
+  },
+  defaultCommandTimeout: 90000,
+  viewportWidth: 1440,
+  viewportHeight: 900,
+  requestTimeout: 90000,
+  responseTimeout: 90000,
+  pageLoadTimeout: 200000,
+  waitForAnimations: true,
+  numTestsKeptInMemory: 0,
+  experimentalMemoryManagement: true,
+});

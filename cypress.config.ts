@@ -1,7 +1,7 @@
 import { config } from "chai";
 
 const { defineConfig } = require("cypress");
-const xlsx = require('node-xlsx').default; //to read excel files
+// const xlsx = require('node-xlsx').default; //to read excel files
 const fs = require('fs'); // for file
 
 module.exports = defineConfig({

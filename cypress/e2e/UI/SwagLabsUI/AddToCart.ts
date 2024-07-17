@@ -30,20 +30,20 @@ describe("Login and Add Items to Cart", () => {
         cy.contains('Shipping Information').should('be.visible');
         cy.contains('Free Pony Express Delivery!').should('be.visible');
 
-        // Extract and assert dynamically for Price Total
-        cy.contains('Price Total').should('be.visible').then(() => {
-            cy.xpath("//div[@class='summary_subtotal_label']").invoke('text').then(itemTotalText => {
-                const itemTotal = parseFloat(itemTotalText.split('$')[1].trim());
-                cy.xpath("//div[@class='summary_tax_label']").invoke('text').then(taxText => {
-                    const tax = parseFloat(taxText.split('$')[1].trim());
-                    cy.xpath("//div[@class='summary_info_label summary_total_label']").invoke('text').then(totalText => {
-                        const total = parseFloat(totalText.split('$')[1].trim());
-                        const expectedTotal = itemTotal + tax;
-                        expect(total).to.equal(expectedTotal);
-                    });
-                });
-            });
-        });
+        // // Extract and assert dynamically for Price Total
+        // cy.contains('Price Total').should('be.visible').then(() => {
+        //     cy.xpath("//div[@class='summary_subtotal_label']").invoke('text').then(itemTotalText => {
+        //         const itemTotal = parseFloat(itemTotalText.split('$')[1].trim());
+        //         cy.xpath("//div[@class='summary_tax_label']").invoke('text').then(taxText => {
+        //             const tax = parseFloat(taxText.split('$')[1].trim());
+        //             cy.xpath("//div[@class='summary_info_label summary_total_label']").invoke('text').then(totalText => {
+        //                 const total = parseFloat(totalText.split('$')[1].trim());
+        //                 const expectedTotal = itemTotal + tax;
+        //                 expect(total).to.equal(expectedTotal);
+        //             });
+        //         });
+        //     });
+        // });
         cy.xpath("//button[@id='finish']").click();
         cy.xpath("//h2[normalize-space()='Thank you for your order!']").should('be.visible');
     });

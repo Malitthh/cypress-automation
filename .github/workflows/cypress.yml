@@ -23,7 +23,7 @@ jobs:
         run: npm i
 
       - name: Run Cypress tests
-        run: cypress run --spec 'cypress/e2e/UI/SwagLabsUI/**/*'"
+        run: npm run cy:run -- --spec "cypress/e2e/UI/SwagLabsUI/**/*.ts
 
       - name: Upload Cypress screenshots and videos
         uses: actions/upload-artifact@v2

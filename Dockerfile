@@ -12,5 +12,5 @@ RUN npm install
 # Copy the rest of the application code to the working directory
 COPY . .
 
-# Command to run Cypress tests in UI mode
-CMD ["npm", "run", "cy:run", "npx", "cypress", "open"]
+# Command to run Cypress tests in UI mode  "npx", "cypress", "open"
+CMD ["npm", "run", "cy:run"]

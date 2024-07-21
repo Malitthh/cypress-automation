@@ -10,8 +10,7 @@
     "uireport": "npx cypress run --spec \"cypress/e2e/UI/SwagLabsUI/*.ts\" --reporter junit --config-file cypress.junit.config.ts --headless",
     "apireport": "npx cypress run --spec cypress/e2e/API/**/*.ts* --reporter junit --config-file cypress.junit.config.ts --headless",
     "cy:open": "cypress open",
-    "cy:run": "cypress run --spec 'cypress/e2e/UI/SwagLabsUI/**/*'",
-    "cypress:open": "npx cypress open"
+    "cy:run": "cypress run --spec 'cypress/e2e/UI/SwagLabsUI/**/*'"
   },
   "keywords": [],
   "author": "",

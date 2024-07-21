@@ -8,8 +8,8 @@ services:
       - .:/app
     working_dir: /app
     command: npm run cy:run
-    environment:
-      - NODE_ENV=development
+    # environment:
+    #   - NODE_ENV=development
     # ports:
     #   - "8080:8080"  # We can adjust ports as necessary
     # depends_on:

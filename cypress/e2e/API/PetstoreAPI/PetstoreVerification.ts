@@ -1,21 +1,21 @@
 /// <reference types="cypress" />
 
-describe("Verify the Test APIs", () => {
+describe("Verify the Petstore APIs", () => {
   var data: any;
   let GetURL: any;
   let apiToken: any;
   let requestId: any;
 
   before(function () {
-    cy.fixture("Files/ABCData/testNewData").then((date) => {
+    cy.fixture("Files/PetstoreData/petstoreHeaders").then((date) => {
       data = date;
       apiToken = data.Test.code;
     });
   });
 
-  //validate the response of post API with API request format
-  it.only("Validate the response of Test API", () => {
-    let filename = "cypress/fixtures/Files/ABCData/testNew_Data_Test.json"; //output file
+  //validate the response of post API with Valid Data
+  it.only("Validate the response of petstore APIs With Valid Data", () => {
+    let filename = "cypress/fixtures/Files/PetstoreData/petstoreOutput.json"; //output file
 
     //define a json obj
     var emptyObj = {
@@ -26,7 +26,7 @@ describe("Verify the Test APIs", () => {
     cy.writeFile(filename, JSON.stringify(emptyObj));
 
     //csv file as input data
-    cy.parseCsv("cypress/fixtures/Files/ABCData/testNew_Data_Input.csv").then((jsonData) => {
+    cy.parseCsv("cypress/fixtures/Files/PetstoreData/petstoreSample.csv").then((jsonData) => {
 
       function unicodeToChar(text) {
         return text.replace(/\\u[\dA-F]{4}/gi, function (match) {
@@ -49,7 +49,7 @@ describe("Verify the Test APIs", () => {
 
         cy.request({
           method: "POST",
-          url: Cypress.env("mockAPIPOST"),
+          url: Cypress.env("petstorePOST"),
           failOnStatusCode: false,
           headers: {
             Accept: "*/*",
@@ -77,7 +77,7 @@ describe("Verify the Test APIs", () => {
           requestId = resFromPost.body["request_id"];
           cy.log(requestId);
           cy.wait(20000);
-          GetURL = Cypress.env("mockAPIGET") + requestId;
+          GetURL = Cypress.env("petstoreGET") + requestId;
           cy.request({
             method: "GET",
             url: GetURL,
@@ -174,9 +174,9 @@ describe("Verify the Test APIs", () => {
   });
 
   //validate the response of post API with empty source-id parameter
-  it("Validate the response of Test API with empty source-id parameter", () => {
+  it("Validate the response of petstore API with empty source-id parameter", () => {
 
-    cy.parseCsv("cypress/fixtures/Files/ABCData/testNew_Data_Input.csv").then((jsonData) => {
+    cy.parseCsv("cypress/fixtures/Files/PetstoreData/petstoreSample.csv").then((jsonData) => {
 
       function unicodeToChar(text) {
         return text.replace(/\\u[\dA-F]{4}/gi, function (match) {
@@ -198,7 +198,7 @@ describe("Verify the Test APIs", () => {
 
         cy.request({
           method: "POST",
-          url: Cypress.env("mockAPIPOST"),
+          url: Cypress.env("petstorePOST"),
           failOnStatusCode: false,
           headers: {
             Accept: "*/*",
@@ -231,9 +231,9 @@ describe("Verify the Test APIs", () => {
   });
 
   //validate the response of post API with empty column_C id parameter
-  it("Validate the response of Test API API with column_C id parameter", () => {
+  it("Validate the response of petstore API with with column_C id parameter", () => {
 
-    cy.parseCsv("cypress/fixtures/Files/ABCData/testNew_Data_Input.csv").then((jsonData) => {
+    cy.parseCsv("cypress/fixtures/Files/PetstoreData/petstoreSample.csv").then((jsonData) => {
 
       function unicodeToChar(text) {
         return text.replace(/\\u[\dA-F]{4}/gi, function (match) {
@@ -256,7 +256,7 @@ describe("Verify the Test APIs", () => {
 
         cy.request({
           method: "POST",
-          url: Cypress.env("mockAPIPOST"),
+          url: Cypress.env("petstorePOST"),
           failOnStatusCode: false,
           headers: {
             Accept: "*/*",
@@ -288,9 +288,9 @@ describe("Verify the Test APIs", () => {
   });
 
   //validate the response of post API with Incorrect code parameter
-  it.skip("Validate the response of Test API API incorrect code parameter", () => {
+  it.skip("Validate the response of petstore API with incorrect code parameter", () => {
 
-    cy.parseCsv("cypress/fixtures/Files/ABCData/testNew_Data_Input.csv").then((jsonData) => {
+    cy.parseCsv("cypress/fixtures/Files/PetstoreData/petstoreSample.csv").then((jsonData) => {
 
       function unicodeToChar(text) {
         return text.replace(/\\u[\dA-F]{4}/gi, function (match) {
@@ -313,7 +313,7 @@ describe("Verify the Test APIs", () => {
 
         cy.request({
           method: "POST",
-          url: Cypress.env("mockAPIPOST"),
+          url: Cypress.env("petstorePOST"),
           failOnStatusCode: false,
           headers: {
             Accept: "*/*",
@@ -344,9 +344,9 @@ describe("Verify the Test APIs", () => {
   });
 
   //validate the response of post API with empty code parameter
-  it.skip("Validate the response of Test API API empty code parameter", () => {
+  it.skip("Validate the response of petstore API with empty code parameter", () => {
 
-    cy.parseCsv("cypress/fixtures/Files/ABCData/testNew_Data_Input.csv").then((jsonData) => {
+    cy.parseCsv("cypress/fixtures/Files/PetstoreData/petstoreSample.csv").then((jsonData) => {
 
       function unicodeToChar(text) {
         return text.replace(/\\u[\dA-F]{4}/gi, function (match) {
@@ -369,8 +369,8 @@ describe("Verify the Test APIs", () => {
 
         cy.request({
           method: "POST",
-          //url: Cypress.env("mockAPIPOST") + "code=" + "" + "&source-id=" + sourceid + "&test-book-id=" + data.Prod.testbookid + "&column-j=" + columnJ,
-          url: Cypress.env("mockAPIPOST"),
+          //url: Cypress.env("petstorePOST") + "code=" + "" + "&source-id=" + sourceid + "&test-book-id=" + data.Prod.testbookid + "&column-j=" + columnJ,
+          url: Cypress.env("petstorePOST"),
           failOnStatusCode: false,
           headers: {
             Accept: "*/*",

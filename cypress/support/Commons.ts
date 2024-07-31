@@ -19,5 +19,22 @@ class Commons {
       zip: randomZip.toString()
     };
   }
+
+  static updateUserPermissions(permission) {
+    cy.xpath("//div[contains(text(),'" + permission + "')]/following-sibling::div//i").then((icon) => {
+      if (icon.attr('class') == 'icon green icon-checked' || icon.attr('class') == 'icon green icon-checked grey') {
+        cy.xpath("//div[contains(text(),'" + permission + "')]/following-sibling::div//i")
+          .should('have.class', 'icon green icon-checked').click()
+        cy.xpath("//div[contains(text(),'" + permission + "')]/following-sibling::div//i")
+          .should('have.class', 'icon green icon-unchecked')
+      } else {
+        cy.xpath("//div[contains(text(),'" + permission + "')]/following-sibling::div//i")
+          .should('have.class', 'icon green icon-unchecked')
+      }
+    })
+    utils.clickButton("Apply Changes");
+    notifications.displayMessage('Success', 'Permissions updated successfully');
+  }
+  
 };
 export default Commons;

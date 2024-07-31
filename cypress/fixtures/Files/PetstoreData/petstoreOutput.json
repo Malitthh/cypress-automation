@@ -1,11 +1,10 @@
 {
     "Stage": {
-        "code": "blablablablablablaba/labla==",
-        "incorrectcode": "blablablablablablaba/labla==24C"
+        "code": "623ryvfiulefbeqfbq13rb",
+        "incorrectcode": "yger713rgrerg12fbdfqgqf"
     },
     "Prod": {
-        "code": "blablablablablablaba/lablacc==",
-        "testbookid": "TEST",
-        "incorrectcode": "blablablablablabla_ba/labla_cc=24="
+        "code": "623ryvfiulefbeqfbq13rb",
+        "incorrectcode": "yger713rgrerg12fbdfqgqf"
     }
 }
